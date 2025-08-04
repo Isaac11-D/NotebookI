@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import fs from 'fs';
 
 export default defineConfig({
     plugins: [
@@ -8,4 +9,11 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        https: {
+            key: fs.readFileSync('certificates/server.key'),
+            cert: fs.readFileSync('certificates/server.crt'),
+        },
+        host: 'localhost', // Usa localhost para desarrollo local
+    },
 });
